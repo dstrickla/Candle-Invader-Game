@@ -1,13 +1,19 @@
 import sys
 import pygame
 
+from settings import Settings
+
 class CandleInvader:
     """Game Asset Management Class"""
      
     def __init__(self):
         """Game Constructor"""
         pygame.init()
-        self.screen = pygame.display.set_mode((600, 800))
+
+        self.settings = Settings()
+
+        self.screen = pygame.display.set_mode((
+            self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Candle Invader")
 
     def run_game(self):
