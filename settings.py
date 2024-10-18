@@ -5,6 +5,9 @@ class Settings:
         """Game Setting initializer"""
 
         # Screen Settings
-        self.screen_width = 1200
+        self.screen_width = 600
         self.screen_height = 800
         
+        # Background Settings
+        image_file = ''
+        image_location = [0,0]
