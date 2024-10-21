@@ -9,5 +9,5 @@ class Settings:
         self.screen_height = 800
         
         # Background Settings
-        image_file = ''
-        image_location = [0,0]
+        self.background_path = r'assets\background_placeholder.png'
+        self.background_cord = [0,0]
