@@ -11,3 +11,6 @@ class Settings:
         # Background Settings
         self.background_path = r'assets\background_placeholder.bmp'
         self.background_cord = [0,0]
+
+        # Player Settings
+        self.player_path = r'assets\player_placeholder.bmp'

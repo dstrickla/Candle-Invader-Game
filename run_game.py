@@ -3,6 +3,7 @@ import pygame
 
 from settings import Settings
 from background import Background
+from player import Player
 
 class CandleInvader:
     """Game Asset Management Class"""
@@ -19,6 +20,7 @@ class CandleInvader:
 
         self.background = Background(self.settings.background_path,
                                       self.settings.background_cord)
+        self.player = Player(self, self.settings.player_path)
 
     def run_game(self):
         """Main Loop Game Logic"""
@@ -30,6 +32,7 @@ class CandleInvader:
 
             self.screen.fill([255, 255, 255])
             self.screen.blit(self.background.image, self.background.rect)
+            self.player.blit_player()
 
             pygame.display.flip()
 
