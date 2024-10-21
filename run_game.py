@@ -23,14 +23,18 @@ class CandleInvader:
                                      self.settings.background_cord)
         self.player = Player(self, self.settings.player_path)
 
+
+    def _check_events(self):
+        """Checks and responds to any new game events"""
+        for event in pygame.event.get():
+            if event == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
     def run_game(self):
         """Main Loop Game Logic"""
         while True: 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-            
+            self._check_events()
             self.background.blit_background()
             self.player.blit_player()
 
