@@ -5,6 +5,7 @@ class Settings:
         """Game Setting initializer"""
 
         # Screen Settings
+        self.screen_origin = 0
         self.screen_width = 600
         self.screen_height = 800
         
@@ -14,3 +15,4 @@ class Settings:
 
         # Player Settings
         self.player_path = r'assets\player_placeholder.bmp'
+        self.p_horiz_speed = 1

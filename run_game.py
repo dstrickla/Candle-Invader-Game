@@ -23,11 +23,28 @@ class CandleInvader:
                                      self.settings.background_cord)
         self.player = Player(self, self.settings.player_path)
 
+    def _check_keydown_events(self, event):
+        """Checks and handles pygame.KEYDOWN game events"""
+        if event.key == pygame.K_d:
+            self.player.moving_right = True 
+        elif event.key == pygame.K_a:
+            self.player.moving_left = True 
+    
+    def _check_keyup_events(self, event):
+        """Checks and handles pygame.KEYUP game events"""
+        if event.key == pygame.K_d:
+            self.player.moving_right = False 
+        elif event.key == pygame.K_a:
+            self.player.moving_left = False
 
     def _check_events(self):
         """Checks and responds to any new game events"""
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+            if event.type == pygame.KEYDOWN:
+                self._check_keydown_events(event)
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_events(event)
+            elif event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
@@ -42,6 +59,7 @@ class CandleInvader:
         """Main Loop Game Logic"""
         while True: 
             self._check_events()
+            self.player.update()
             self._update_screen()
 
 if __name__ == '__main__':
