@@ -27,18 +27,22 @@ class CandleInvader:
     def _check_events(self):
         """Checks and responds to any new game events"""
         for event in pygame.event.get():
-            if event == pygame.QUIT:
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+
+    def _update_screen(self):
+        """Update the main game screen display"""
+        self.background.blit_background()
+        self.player.blit_player()
+
+        pygame.display.update()
 
     def run_game(self):
         """Main Loop Game Logic"""
         while True: 
             self._check_events()
-            self.background.blit_background()
-            self.player.blit_player()
-
-            pygame.display.flip()
+            self._update_screen()
 
 if __name__ == '__main__':
     game = CandleInvader()
