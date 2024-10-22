@@ -7,7 +7,7 @@ class Settings:
         # Screen Settings
         self.screen_origin = 0
         self.screen_width = 672
-        self.screen_height = 800
+        self.screen_height = 864
         
         # Background Settings
         self.background_path = r'assets\background_placeholder.bmp'
