@@ -15,4 +15,4 @@ class Settings:
 
         # Player Settings
         self.player_path = r'assets\player_placeholder.bmp'
-        self.p_horiz_speed = 1
+        self.p_horiz_speed = 10

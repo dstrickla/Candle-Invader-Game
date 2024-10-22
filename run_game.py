@@ -13,6 +13,7 @@ class CandleInvader:
         pygame.init()
 
         self.settings = Settings()
+        self.clock = pygame.time.Clock()
 
         self.screen = pygame.display.set_mode((
             self.settings.screen_width, self.settings.screen_height))
@@ -29,6 +30,8 @@ class CandleInvader:
             self.player.moving_right = True 
         elif event.key == pygame.K_a:
             self.player.moving_left = True 
+        elif event.key == pygame.K_SPACE:
+            self.player.is_jumping = True 
     
     def _check_keyup_events(self, event):
         """Checks and handles pygame.KEYUP game events"""
@@ -58,6 +61,7 @@ class CandleInvader:
     def run_game(self):
         """Main Loop Game Logic"""
         while True: 
+            self.clock.tick(60)
             self._check_events()
             self.player.update()
             self._update_screen()
