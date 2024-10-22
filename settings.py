@@ -6,7 +6,7 @@ class Settings:
 
         # Screen Settings
         self.screen_origin = 0
-        self.screen_width = 600
+        self.screen_width = 672
         self.screen_height = 800
         
         # Background Settings
@@ -19,3 +19,4 @@ class Settings:
 
         # Block Settings 
         self.block_path = r'assets\block_placeholder.bmp'
+        self.block_dim = 96

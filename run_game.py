@@ -4,6 +4,7 @@ import pygame
 from settings import Settings
 from background import Background
 from player import Player
+from block import Block 
 
 class CandleInvader:
     """Game Asset Management Class"""
@@ -23,6 +24,17 @@ class CandleInvader:
                                      self.settings.background_path,
                                      self.settings.background_cord)
         self.player = Player(self, self.settings.player_path)
+        self.floor = self.get_floor_group()
+
+    def get_floor_group(self):
+        floor = pygame.sprite.Group() 
+        y = self.settings.screen_height - (abs(self.settings.block_dim/2))
+        locations = [(x, y) for x in range(48, self.settings.screen_width+1, 96)]
+
+        for location in locations:
+            floor.add(Block(self, location))
+
+        return floor
 
     def _check_keydown_events(self, event):
         """Checks and handles pygame.KEYDOWN game events"""
@@ -55,6 +67,7 @@ class CandleInvader:
         """Update the main game screen display"""
         self.background.blit_background()
         self.player.blit_player()
+        self.floor.draw(self.screen)
 
         pygame.display.update()
 
