@@ -10,7 +10,7 @@ class Player:
 
         self.image = image.load(image_path) # Image and rect
         self.rect = self.rect = self.image.get_rect()
-        self.rect.midbottom = self.screen_rect.midbottom
+        self.rect.midbottom = self.screen_rect.center
 
         self.moving_right = False # Horizontal Movement
         self.moving_left = False 
