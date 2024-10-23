@@ -5,6 +5,7 @@ from settings import Settings
 from background import Background
 from player import Player
 from block import Block 
+from fireball import Fireball
 
 class CandleInvader:
     """Game Asset Management Class"""
@@ -25,6 +26,12 @@ class CandleInvader:
                                      self.settings.background_cord)
         self.player = Player(self, self.settings.player_path)
         self.floor = self.get_floor_group()
+
+        
+
+        self.left_fireball = Fireball(self, moving_left=True)
+        self.right_fireball = Fireball(self, moving_right=True)
+        self.up_fireball = Fireball(self, moving_up=True)
 
     def get_floor_group(self):
         floor = pygame.sprite.Group() 
@@ -69,6 +76,10 @@ class CandleInvader:
         self.player.blit_player()
         self.floor.draw(self.screen)
 
+        self.up_fireball.blit_fireball()
+        self.right_fireball.blit_fireball()
+        self.left_fireball.blit_fireball()
+
         pygame.display.update()
 
     def run_game(self):
@@ -77,6 +88,11 @@ class CandleInvader:
             self.clock.tick(60)
             self._check_events()
             self.player.update()
+
+            self.up_fireball.update()
+            self.left_fireball.update() 
+            self.right_fireball.update()
+
             self._update_screen()
 
 if __name__ == '__main__':
