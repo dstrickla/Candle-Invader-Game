@@ -17,6 +17,10 @@ class Settings:
         self.player_path = r'assets\player_placeholder.bmp'
         self.p_horiz_speed = 10
 
+        # Player Fireball Settings
+        self.fireball_speed = 15 
+        self.fireball_path = r'assets\fireball_placeholder.bmp'
+
         # Block Settings 
         self.block_path = r'assets\block_placeholder.bmp'
         self.block_dim = 96
