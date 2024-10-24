@@ -18,7 +18,7 @@ class Settings:
         self.p_horiz_speed = 10
 
         # Player Fireball Settings
-        self.fireball_speed = 15 
+        self.fireball_speed = 20 
         self.fireball_path = r'assets\fireball_placeholder.bmp'
 
         # Block Settings 

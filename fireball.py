@@ -5,9 +5,10 @@ class Fireball(sprite.Sprite):
     """Class representing player fireball attack"""
 
     def __init__(self, game, 
-                 moving_left=False, 
-                 moving_right=False, 
-                 moving_up=False):
+                 left_fireball=False, 
+                 right_fireball=False, 
+                 up_fireball=False,
+                 down_fireball=False):
         
         sprite.Sprite.__init__(self) #
         self.game = game
@@ -18,30 +19,36 @@ class Fireball(sprite.Sprite):
         self.image = image.load(self.settings.fireball_path)
         self.rect = self.image.get_rect() 
         
-        self.moving_left = moving_left 
-        self.moving_right = moving_right 
-        self.moving_up = moving_up  
-        self.set_rect_start() 
+        self.left_fireball = left_fireball 
+        self.right_fireball = right_fireball 
+        self.up_fireball = up_fireball  
+        self.down_fireball = down_fireball
+
+        self._set_rect_start() 
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-    def set_rect_start(self):
-        """Sets start position depending on direction fired"""
-        if self.moving_left:
-            self.rect.midright = self.game.player.rect.midright
-        elif self.moving_right:
-            self.rect.midleft = self.game.player.rect.midleft  
-        elif self.moving_up:
+    def _set_rect_start(self):
+        """Sets start position depending based on direction fired"""
+        if self.left_fireball:
+            self.rect.midleft = self.game.player.rect.midleft
+        elif self.right_fireball:
+            self.rect.midright = self.game.player.rect.midright  
+        elif self.up_fireball:
             self.rect.midtop = self.game.player.rect.midtop 
+        else: # self.down_fireball 
+            self.rect.midbottom = self.game.player.rect.midbottom
 
     def update(self):
         """Updates the fireball's position on the screen"""
-        if self.moving_left:
+        if self.left_fireball:
             self.x -= self.settings.fireball_speed 
-        elif self.moving_right:
-            self.x += self.settings.fireball_speed 
-        else: #self.moving_up 
+        elif self.right_fireball:
+            self.x += self.settings.fireball_speed
+        elif self.up_fireball: 
             self.y -= self.settings.fireball_speed 
+        else: #self.down_fireball 
+            self.y += self.settings.fireball_speed 
 
         self.rect.x = self.x 
         self.rect.y = self.y  

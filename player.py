@@ -16,11 +16,15 @@ class Player:
 
         self.moving_right = False # Horizontal Movement
         self.moving_left = False 
+        self.is_jumping = False # Vertical Movement (Jumping)
+        self.jump_count = 12 
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-        self.is_jumping = False # Vertical Movement (Jumping)
-        self.jump_count = 12 
+        self.looking_up = False
+        self.looking_down = False 
+        self.looking_left = False 
+        self.looking_right = False
 
     def jump(self):
         """Handles the logic of a player jump event"""
@@ -30,6 +34,13 @@ class Player:
         else: 
             self.jump_count = 12
             self.is_jumping = False
+
+    def set_look_direction(self, up=False, down=False, left=False, right=False):
+        """Updates the look direction of the player"""
+        self.looking_up = up
+        self.looking_down = down  
+        self.looking_left = left 
+        self.looking_right = right        
 
     def update(self):
         """Updates the player's rect position on game screen"""
