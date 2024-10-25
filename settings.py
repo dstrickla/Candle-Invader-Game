@@ -29,6 +29,16 @@ class Settings:
         self.fireball_speed = 20 
         self.fireball_path = r'assets\fireball_placeholder.bmp'
 
+        # Generic Enemy Settings 
+        
+        # Flying Enemy Settings (Ghost)
+        self.ghost_img_path = r''      
+        self.ghost_horizontal_speed = 10  
+
+        # Walking Enemy Settings (Walker)
+        self.walker_img_path = r''
+        self.walker_horizontal_speed = 10 
+
         # Block Settings 
         self.block_path = r'assets\block_placeholder.bmp'
         self.block_dim = 96

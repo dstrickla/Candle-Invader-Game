@@ -5,6 +5,8 @@ from settings import Settings
 from background import Background
 from player import Player
 from floor import Floor
+from enemy import Ghost 
+from enemy import Walker 
 
 class CandleInvader:
     """Game Asset Management Class"""
