@@ -10,8 +10,9 @@ class Settings:
         self.screen_height = 864
         
         # Background Settings
-        self.background_path = r'assets\background_placeholder.bmp'
-        self.background_cord = [0,0]
+        self.background_img_path= r'assets\background_placeholder.bmp'
+        self.background_x_start = 0
+        self.background_y_start = 0 
 
         # Player Settings
         self.player_img_path = r'assets\player_placeholder.bmp'
