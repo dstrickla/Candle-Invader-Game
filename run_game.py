@@ -21,9 +21,7 @@ class CandleInvader:
             self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Candle Invader")
 
-        self.background = Background(self, 
-                                     self.settings.background_path,
-                                     self.settings.background_cord)
+        self.background = Background(self)
         self.player = Player(self)
         self.floor = self._get_floor_group()
         self.fireballs = pygame.sprite.Group()
