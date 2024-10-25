@@ -4,32 +4,36 @@ class Player:
     """Class representing the playable character 'Phil'"""
 
     def __init__(self, game):
-        self.screen = game.screen # Game 
+        # Game attributes
+        self.screen = game.screen 
         self.screen_rect = game.screen.get_rect()
         self.settings = game.settings
 
-        self.image = image.load(game.settings.player_path) # Image and rect
-        self.rect = self.rect = self.image.get_rect()
-        self.x_start = self.screen.get_width()/2 
-        self.y_start = self.screen.get_height() - self.settings.block_dim * 1.5
-        self.rect.center = (self.x_start, self.y_start)
+        # Player image and rect attributes
+        self.image = image.load(game.settings.player_img_path)
+        self.rect = self.image.get_rect()
+        self.rect.center = (self.settings.player_x_start,
+                            self.settings.player_y_start)
 
-        self.moving_right = False # Horizontal Movement
-        self.moving_left = False 
-        self.is_jumping = False # Vertical Movement (Jumping)
-        self.jump_count = 12 
+        # Player Motion attributes
+        self.is_moving_right = False 
+        self.is_moving_left = False 
+        self.is_jumping = False 
+        self.jump_count = self.settings.player_jump_count
+        self.jump_modifier = self.settings.player_jump_modifier
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-        self.looking_up = False
-        self.looking_down = False 
-        self.looking_left = False 
-        self.looking_right = False
+        # Player looking direction attributes
+        self.is_looking_up = False
+        self.is_looking_down = False 
+        self.is_looking_left = False 
+        self.is_looking_right = False
 
     def jump(self):
         """Handles the logic of a player jump event"""
         if self.jump_count >= -12: 
-            self.y -= (self.jump_count * abs(self.jump_count)) * 0.3
+            self.y -= (self.jump_count * abs(self.jump_count)) * self.jump_modifier
             self.jump_count -= 1
         else: 
             self.jump_count = 12
@@ -37,17 +41,19 @@ class Player:
 
     def set_look_direction(self, up=False, down=False, left=False, right=False):
         """Updates the look direction of the player"""
-        self.looking_up = up
-        self.looking_down = down  
-        self.looking_left = left 
-        self.looking_right = right        
+        self.is_looking_up = up
+        self.is_looking_down = down  
+        self.is_looking_left = left 
+        self.is_looking_right = right        
 
     def update(self):
         """Updates the player's rect position on game screen"""
-        if self.moving_right and self.rect.right + self.settings.p_horiz_speed < self.screen_rect.right:
-            self.x += self.settings.p_horiz_speed
-        if self.moving_left and self.rect.left - self.settings.p_horiz_speed >= self.settings.screen_origin:
-            self.x -= self.settings.p_horiz_speed
+        right_bound = self.settings.screen_width 
+        left_bound = self.settings.screen_origin
+        if self.is_moving_right and self.rect.right < right_bound:
+            self.x += self.settings.player_horizontal_speed
+        if self.is_moving_left and self.rect.left > left_bound:
+            self.x -= self.settings.player_horizontal_speed
         if self.is_jumping: 
             self.jump()
 

@@ -42,10 +42,10 @@ class CandleInvader:
     def _shoot_fireball(self):
         """Creates a new fireball, shot by the player"""
         new_fireball = Fireball(self, 
-                                left_fireball=self.player.looking_left,
-                                right_fireball=self.player.looking_right,
-                                up_fireball=self.player.looking_up,
-                                down_fireball=self.player.looking_down)
+                                left_fireball=self.player.is_looking_left,
+                                right_fireball=self.player.is_looking_right,
+                                up_fireball=self.player.is_looking_up,
+                                down_fireball=self.player.is_looking_down)
         self.fireballs.add(new_fireball)
 
     def _update_fireballs(self):
@@ -64,12 +64,12 @@ class CandleInvader:
         if event.key == pygame.K_w:
             self.player.set_look_direction(up=True)
         elif event.key == pygame.K_a:
-            self.player.moving_left = True 
+            self.player.is_moving_left = True 
             self.player.set_look_direction(left=True)
         elif event.key == pygame.K_s: 
             self.player.set_look_direction(down=True)
         elif event.key == pygame.K_d:
-            self.player.moving_right = True 
+            self.player.is_moving_right = True 
             self.player.set_look_direction(right=True)
         elif event.key == pygame.K_SPACE:
             self.player.is_jumping = True
@@ -80,9 +80,9 @@ class CandleInvader:
     def _check_keyup_events(self, event):
         """Checks and handles pygame.KEYUP game events"""
         if event.key == pygame.K_d:
-            self.player.moving_right = False 
+            self.player.is_moving_right = False 
         elif event.key == pygame.K_a:
-            self.player.moving_left = False
+            self.player.is_moving_left = False
             
 
     def _check_events(self):

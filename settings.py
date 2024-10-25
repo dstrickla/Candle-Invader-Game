@@ -14,8 +14,14 @@ class Settings:
         self.background_cord = [0,0]
 
         # Player Settings
-        self.player_path = r'assets\player_placeholder.bmp'
-        self.p_horiz_speed = 10
+        self.player_img_path = r'assets\player_placeholder.bmp'
+        self.player_horizontal_speed = 10
+        self.player_jump_count = 12
+        self.player_jump_modifier = 0.3
+        self.player_height = 96
+        self.player_width = 96 
+        self.player_x_start = self.screen_width / 2
+        self.player_y_start = self.screen_height - (self.player_height * 1.5)
 
         # Player Fireball Settings
         self.fireball_speed = 20 
