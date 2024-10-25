@@ -36,7 +36,7 @@ class Settings:
         self.ghost_horizontal_speed = 10  
 
         # Walking Enemy Settings (Walker)
-        self.walker_img_path = r''
+        self.walker_img_path = r'assets\walker_placeholder.bmp'
         self.walker_horizontal_speed = 10 
 
         # Block Settings 
