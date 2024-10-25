@@ -30,9 +30,9 @@ class Settings:
         self.fireball_path = r'assets\fireball_placeholder.bmp'
 
         # Generic Enemy Settings 
-        
+
         # Flying Enemy Settings (Ghost)
-        self.ghost_img_path = r''      
+        self.ghost_img_path = r'assets\ghost_placeholder.bmp'      
         self.ghost_horizontal_speed = 10  
 
         # Walking Enemy Settings (Walker)
