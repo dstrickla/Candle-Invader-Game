@@ -3,12 +3,12 @@ from pygame import image
 class Player:
     """Class representing the playable character 'Phil'"""
 
-    def __init__(self, game, image_path):
+    def __init__(self, game):
         self.screen = game.screen # Game 
         self.screen_rect = game.screen.get_rect()
         self.settings = game.settings
 
-        self.image = image.load(image_path) # Image and rect
+        self.image = image.load(game.settings.player_path) # Image and rect
         self.rect = self.rect = self.image.get_rect()
         self.x_start = self.screen.get_width()/2 
         self.y_start = self.screen.get_height() - self.settings.block_dim * 1.5

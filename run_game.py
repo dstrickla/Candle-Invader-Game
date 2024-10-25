@@ -24,7 +24,7 @@ class CandleInvader:
         self.background = Background(self, 
                                      self.settings.background_path,
                                      self.settings.background_cord)
-        self.player = Player(self, self.settings.player_path)
+        self.player = Player(self)
         self.floor = self._get_floor_group()
         self.fireballs = pygame.sprite.Group()
 
