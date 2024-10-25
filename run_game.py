@@ -40,10 +40,10 @@ class CandleInvader:
     def _shoot_fireball(self):
         """Creates a new fireball, shot by the player"""
         new_fireball = Fireball(self, 
-                                left_fireball=self.player.is_looking_left,
-                                right_fireball=self.player.is_looking_right,
-                                up_fireball=self.player.is_looking_up,
-                                down_fireball=self.player.is_looking_down)
+                                is_shot_left=self.player.is_looking_left,
+                                is_shot_right=self.player.is_looking_right,
+                                is_shot_up=self.player.is_looking_up,
+                                is_shot_down=self.player.is_looking_down)
         self.fireballs.add(new_fireball)
 
     def _update_fireballs(self):
