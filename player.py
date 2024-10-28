@@ -1,10 +1,14 @@
 from pygame import image
 
+from fireball import Fireball 
+from fireball import FireballGroup
+
 class Player:
     """Class representing the playable character 'Phil'"""
 
     def __init__(self, game):
         # Game attributes
+        self.game = game
         self.screen = game.screen 
         self.screen_rect = game.screen.get_rect()
         self.settings = game.settings
@@ -30,6 +34,9 @@ class Player:
         self.is_looking_left = False 
         self.is_looking_right = False
 
+        # Player Fireball Group 
+        self.fireball_group = FireballGroup(game)
+
     def jump(self):
         """Handles the logic of a player jump event"""
         if self.jump_count >= -12: 
@@ -38,6 +45,11 @@ class Player:
         else: 
             self.jump_count = 12
             self.is_jumping = False
+
+    def shoot_fireball(self):
+        """Adds a new fireball to the players group"""
+        new_fireball = Fireball(self.game, self)
+        self.fireball_group.add(new_fireball)
 
     def set_look_direction(self, up=False, down=False, left=False, right=False):
         """Updates the look direction of the player"""

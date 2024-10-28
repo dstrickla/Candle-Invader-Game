@@ -4,12 +4,7 @@ from pygame import image
 class Fireball(sprite.Sprite):
     """Class representing player fireball attack"""
 
-    def __init__(self, game, 
-                 is_shot_left=False, 
-                 is_shot_right=False, 
-                 is_shot_up=False,
-                 is_shot_down=False):
-        
+    def __init__(self, game, player):
         sprite.Sprite.__init__(self) 
         # Game Attributes
         self.game = game
@@ -17,11 +12,13 @@ class Fireball(sprite.Sprite):
         self.screen_rect = game.screen.get_rect()
         self.settings = game.settings  
 
+        self.sprite = player 
+
         # Fireball direction attributes
-        self.is_shot_left = is_shot_left 
-        self.is_shot_right = is_shot_right 
-        self.is_shot_up = is_shot_up  
-        self.is_shot_down = is_shot_down
+        self.is_shot_left = player.is_looking_left  
+        self.is_shot_right = player.is_looking_right 
+        self.is_shot_up = player.is_looking_up
+        self.is_shot_down = player.is_looking_down
 
         # Fireball image and rect attributes
         self.image = image.load(self.settings.fireball_path)
@@ -68,7 +65,6 @@ class FireballGroup(sprite.Group):
 
         self.game = game 
         self.screen = game.screen 
-        self.screen_rect = game.screen_rect 
         self.settings = game.settings 
 
         self.left_screen_bound = self.settings.screen_origin  
@@ -79,7 +75,7 @@ class FireballGroup(sprite.Group):
 
     def clear_offscreen_fireballs(self):
         """Removes any fireballs that have left the game screen window"""
-        for fireball in self.copy():
+        for fireball in self:
             if (fireball.rect.bottom <= self.upper_screen_bound or \
                 fireball.rect.top >= self.lower_screen_bound or \
                 fireball.rect.right <= self.left_screen_bound or \
