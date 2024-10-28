@@ -13,9 +13,7 @@ class Fireball(sprite.Sprite):
         self.screen_rect = game.screen.get_rect()
         self.settings = game.settings  
 
-        self.sprite = player 
-
-        # Fireball direction attributes
+        # Fireball direction attribute
         self.shot_direction = player.look_direction
 
         # Fireball image and rect attributes
@@ -26,7 +24,7 @@ class Fireball(sprite.Sprite):
         self.y = float(self.rect.y)
 
     def _set_rect_start(self):
-        """Sets start position depending based on direction fired"""
+        """Sets start position based on direction fired in"""
         match(self.shot_direction):
             case Direction.LEFT.value: 
                  self.rect.midleft = self.game.player.rect.midleft
@@ -66,7 +64,6 @@ class FireballGroup(sprite.Group):
         self.game = game 
         self.screen = game.screen 
         self.settings = game.settings 
-
         self.left_screen_bound = self.settings.screen_origin  
         self.right_screen_bound = self.settings.screen_width 
         self.upper_screen_bound = self.settings.screen_origin

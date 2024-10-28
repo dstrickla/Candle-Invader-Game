@@ -21,8 +21,7 @@ class CandleInvader:
         
         self.background = Background(self)
         self.player = Player(self)
-        self.floor_group = Floor(self,
-                                 self.settings.floor_x_start,
+        self.floor_group = Floor(self, self.settings.floor_x_start, 
                                  self.settings.floor_x_finish, 
                                  self.settings.floor_y_height)
 

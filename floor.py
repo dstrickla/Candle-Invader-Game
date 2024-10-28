@@ -6,11 +6,10 @@ class Block(sprite.Sprite):
 
     def __init__(self, game, location=(0,0)):
         """Block Constructor"""
+        sprite.Sprite.__init__(self)
         self.screen = game.screen 
         self.screen_rect = game.screen.get_rect() 
         self.settings = game.settings 
-
-        sprite.Sprite.__init__(self)
         self.image = image.load(self.settings.block_path)
         self.rect = self.image.get_rect() 
         self.rect.center = location 
