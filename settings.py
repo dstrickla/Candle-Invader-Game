@@ -1,3 +1,4 @@
+from enum import Enum 
 class Settings:
     """Class storage for game settings"""
 
@@ -36,3 +37,9 @@ class Settings:
         self.floor_x_start = int(self.block_dim/2)
         self.floor_x_finish = self.screen_width + 1
         self.floor_y_height = self.screen_height - int(self.block_dim/2)
+
+class Direction(Enum): 
+    UP = 0 
+    RIGHT = 1 
+    DOWN = 2 
+    LEFT = 3 

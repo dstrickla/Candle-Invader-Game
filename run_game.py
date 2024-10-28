@@ -5,7 +5,6 @@ from settings import Settings
 from background import Background
 from player import Player
 from floor import Floor
-from fireball import Fireball
 
 class CandleInvader:
     """Game Asset Management Class"""
@@ -30,18 +29,18 @@ class CandleInvader:
     def _check_keydown_events(self, event):
         """Checks and handles pygame.KEYDOWN game events"""
         if event.key == pygame.K_w:
-            self.player.set_look_direction(up=True)
+            self.player.set_look_direction_up()
         elif event.key == pygame.K_a:
             self.player.is_moving_left = True 
-            self.player.set_look_direction(left=True)
+            self.player.set_look_direction_left()
         elif event.key == pygame.K_s: 
-            self.player.set_look_direction(down=True)
+            self.player.set_look_direction_down()
         elif event.key == pygame.K_d:
             self.player.is_moving_right = True 
-            self.player.set_look_direction(right=True)
+            self.player.set_look_direction_right()
         elif event.key == pygame.K_SPACE:
             self.player.is_jumping = True
-            self.player.set_look_direction(up=True)
+            self.player.set_look_direction_up()
         elif event.key == pygame.K_LSHIFT:
             self.player.shoot_fireball()
     

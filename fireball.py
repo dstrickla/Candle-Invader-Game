@@ -1,5 +1,6 @@
 from pygame import sprite 
 from pygame import image 
+from settings import Direction
 
 class Fireball(sprite.Sprite):
     """Class representing player fireball attack"""
@@ -15,10 +16,7 @@ class Fireball(sprite.Sprite):
         self.sprite = player 
 
         # Fireball direction attributes
-        self.is_shot_left = player.is_looking_left  
-        self.is_shot_right = player.is_looking_right 
-        self.is_shot_up = player.is_looking_up
-        self.is_shot_down = player.is_looking_down
+        self.shot_direction = player.look_direction
 
         # Fireball image and rect attributes
         self.image = image.load(self.settings.fireball_path)
@@ -29,25 +27,27 @@ class Fireball(sprite.Sprite):
 
     def _set_rect_start(self):
         """Sets start position depending based on direction fired"""
-        if self.is_shot_left:
-            self.rect.midleft = self.game.player.rect.midleft
-        elif self.is_shot_right:
-            self.rect.midright = self.game.player.rect.midright  
-        elif self.is_shot_up:
-            self.rect.midtop = self.game.player.rect.midtop 
-        else: # self.down_fireball 
-            self.rect.midbottom = self.game.player.rect.midbottom
+        match(self.shot_direction):
+            case Direction.LEFT.value: 
+                 self.rect.midleft = self.game.player.rect.midleft
+            case Direction.RIGHT.value: 
+                self.rect.midright = self.game.player.rect.midright 
+            case Direction.UP.value: 
+                self.rect.midtop = self.game.player.rect.midtop 
+            case Direction.DOWN.value: 
+                self.rect.midbottom = self.game.player.rect.midbottom
 
     def update(self):
         """Updates the fireball's position on the screen"""
-        if self.is_shot_left:
-            self.x -= self.settings.fireball_speed 
-        elif self.is_shot_right:
-            self.x += self.settings.fireball_speed
-        elif self.is_shot_up: 
-            self.y -= self.settings.fireball_speed 
-        else: #self.down_fireball 
-            self.y += self.settings.fireball_speed 
+        match(self.shot_direction):
+            case Direction.LEFT.value: 
+                self.x -= self.settings.fireball_speed 
+            case Direction.RIGHT.value: 
+                self.x += self.settings.fireball_speed 
+            case Direction.UP.value: 
+                self.y -= self.settings.fireball_speed 
+            case Direction.DOWN.value: 
+                self.y += self.settings.fireball_speed 
 
         self.rect.x = self.x 
         self.rect.y = self.y  

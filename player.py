@@ -2,6 +2,7 @@ from pygame import image
 
 from fireball import Fireball 
 from fireball import FireballGroup
+from settings import Direction
 
 class Player:
     """Class representing the playable character 'Phil'"""
@@ -29,10 +30,7 @@ class Player:
         self.y = float(self.rect.y)
 
         # Player looking direction attributes
-        self.is_looking_up = False
-        self.is_looking_down = False 
-        self.is_looking_left = False 
-        self.is_looking_right = False
+        self.look_direction = Direction.LEFT.value
 
         # Player Fireball Group 
         self.fireball_group = FireballGroup(game)
@@ -51,12 +49,21 @@ class Player:
         new_fireball = Fireball(self.game, self)
         self.fireball_group.add(new_fireball)
 
-    def set_look_direction(self, up=False, down=False, left=False, right=False):
-        """Updates the look direction of the player"""
-        self.is_looking_up = up
-        self.is_looking_down = down  
-        self.is_looking_left = left 
-        self.is_looking_right = right        
+    def set_look_direction_up(self):
+        """Sets player look direction upwards"""
+        self.look_direction = Direction.UP.value 
+
+    def set_look_direction_right(self):
+        """Sets player look direction to the right"""
+        self.look_direction = Direction.RIGHT.value 
+
+    def set_look_direction_down(self): 
+        """Sets player look direction downwards"""
+        self.look_direction = Direction.DOWN.value
+
+    def set_look_direction_left(self):
+        """Sets player look direction left"""
+        self.look_direction = Direction.LEFT.value
 
     def update(self):
         """Updates the player's rect position on game screen"""
