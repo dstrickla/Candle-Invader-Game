@@ -30,8 +30,6 @@ class Fireball(sprite.Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-
-
     def _set_rect_start(self):
         """Sets start position depending based on direction fired"""
         if self.is_shot_left:
@@ -61,4 +59,34 @@ class Fireball(sprite.Sprite):
         """Draws the fireball to the screen"""
         self.screen.blit(self.image, self.rect)
 
+
+class FireballGroup(sprite.Group):
+    """Class representing a group of active fireball sprites"""
+
+    def __init__(self, game):
+        sprite.Group.__init__(self) 
+
+        self.game = game 
+        self.screen = game.screen 
+        self.screen_rect = game.screen_rect 
+        self.settings = game.settings 
+
+        self.left_screen_bound = self.settings.screen_origin  
+        self.right_screen_bound = self.settings.screen_width 
+        self.upper_screen_bound = self.settings.screen_origin
+        self.lower_screen_bound = self.settings.screen_height 
+
+
+    def clear_offscreen_fireballs(self):
+        """Removes any fireballs that have left the game screen window"""
+        for fireball in self.copy():
+            if (fireball.rect.bottom <= self.upper_screen_bound or \
+                fireball.rect.top >= self.lower_screen_bound or \
+                fireball.rect.right <= self.left_screen_bound or \
+                fireball.rect.left >= self.right_screen_bound):
+                self.remove(fireball)
+
+    
+
+    
 

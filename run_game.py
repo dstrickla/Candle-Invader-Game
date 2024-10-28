@@ -37,16 +37,16 @@ class CandleInvader:
                                 is_shot_down=self.player.is_looking_down)
         self.fireballs_group.add(new_fireball)
 
-    def _update_fireballs(self):
-        """Updates all fireballs position and removes those off screen"""
-        self.fireballs_group.update()
+    # def _update_fireballs(self):
+    #     """Updates all fireballs position and removes those off screen"""
+    #     self.fireballs_group.update()
 
-        for fireball in self.fireballs_group.copy(): 
-            if (fireball.rect.bottom <= 0 or \
-                fireball.rect.top >= self.screen.get_height() or \
-                fireball.rect.right <= 0 or \
-                fireball.rect.left >= self.screen.get_width()):
-                self.fireballs_group.remove(fireball)
+    #     for fireball in self.fireballs_group.copy(): 
+    #         if (fireball.rect.bottom <= 0 or \
+    #             fireball.rect.top >= self.screen.get_height() or \
+    #             fireball.rect.right <= 0 or \
+    #             fireball.rect.left >= self.screen.get_width()):
+    #             self.fireballs_group.remove(fireball)
 
     def _check_keydown_events(self, event):
         """Checks and handles pygame.KEYDOWN game events"""
