@@ -31,3 +31,8 @@ class Settings:
         # Block Settings 
         self.block_path = r'assets\block_placeholder.bmp'
         self.block_dim = 96
+
+        # Floor Settings 
+        self.floor_x_start = int(self.block_dim/2)
+        self.floor_x_finish = self.screen_width + 1
+        self.floor_y_height = self.screen_height - int(self.block_dim/2)

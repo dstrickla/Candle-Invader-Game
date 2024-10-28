@@ -4,7 +4,7 @@ import pygame
 from settings import Settings
 from background import Background
 from player import Player
-from block import Block 
+from floor import Floor
 from fireball import Fireball
 
 class CandleInvader:
@@ -22,20 +22,12 @@ class CandleInvader:
         
         self.background = Background(self)
         self.player = Player(self)
-        self.floor_group = self._get_floor_group()
+        self.floor_group = Floor(self,
+                                 self.settings.floor_x_start,
+                                 self.settings.floor_x_finish, 
+                                 self.settings.floor_y_height)
         self.fireballs_group = pygame.sprite.Group()
 
-    def _get_floor_group(self):
-        """Creates a group of floor blocks at the bottom of the screen"""
-        floor = pygame.sprite.Group() 
-        y = self.settings.screen_height - (abs(self.settings.block_dim/2))
-        locations = [(x, y) for x in range(48, self.settings.screen_width+1, 96)]
-
-        for location in locations:
-            floor.add(Block(self, location))
-
-        return floor
-    
     def _shoot_fireball(self):
         """Creates a new fireball, shot by the player"""
         new_fireball = Fireball(self, 
