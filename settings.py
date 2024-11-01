@@ -33,7 +33,13 @@ class Settings:
 
         # Flying Enemy Settings (Ghost)
         self.ghost_img_path = r'assets\ghost_placeholder.bmp'      
-        self.ghost_horizontal_speed = 10  
+        self.ghost_horizontal_speed = 10 
+        self.ghost_width = 96 
+        self.ghost_height = 96
+
+        # Ghost Swarm Settings
+        self.swarm_horizontal_margin = self.ghost_width // 4 
+        self.swarm_vertical_margin = self.ghost_height // 4
 
         # Walking Enemy Settings (Walker)
         self.walker_img_path = r'assets\walker_placeholder.bmp'

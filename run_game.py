@@ -5,8 +5,7 @@ from settings import Settings
 from background import Background
 from player import Player
 from floor import Floor
-from enemy import Ghost 
-from enemy import Walker 
+from enemy import GhostSwarmGroup
 
 class CandleInvader:
     """Game Asset Management Class"""
@@ -23,6 +22,7 @@ class CandleInvader:
         
         self.background = Background(self)
         self.player = Player(self)
+        self.enemy_group = GhostSwarmGroup(self)
         self.floor_group = Floor(self, self.settings.floor_x_start, 
                                  self.settings.floor_x_finish, 
                                  self.settings.floor_y_height)
@@ -70,6 +70,7 @@ class CandleInvader:
         self.floor_group.draw(self.screen)
         for fireball in self.player.fireball_group:
             fireball.blit_fireball()
+        self.enemy_group.draw(self.screen)
 
         pygame.display.update()
 
