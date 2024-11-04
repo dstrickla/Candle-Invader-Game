@@ -68,8 +68,7 @@ class CandleInvader:
         self.background.blit_background()
         self.player.blit_player()
         self.floor_group.draw(self.screen)
-        for fireball in self.player.fireball_group:
-            fireball.blit_fireball()
+        self.player.fireball_group.draw(self.screen)
         self.enemy_group.draw(self.screen)
 
         pygame.display.update()
@@ -82,8 +81,10 @@ class CandleInvader:
             self.player.update()
             self.player.fireball_group.update()
             self.player.fireball_group.clear_offscreen_fireballs()
+            self.enemy_group.update()
+            self.enemy_group.check_swarm_direction_change()
             self._update_screen()
 
 if __name__ == '__main__':
     game = CandleInvader()
-    game.run_game()
+    game.run_game() 
