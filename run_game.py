@@ -81,6 +81,7 @@ class CandleInvader:
             self.player.update()
             self.player.fireball_group.update()
             self.player.fireball_group.clear_offscreen_fireballs()
+            self.enemy_group.remove_shot_ghosts(self.player.fireball_group)
             self.enemy_group.update()
             self.enemy_group.check_swarm_direction_change()
             self._update_screen()

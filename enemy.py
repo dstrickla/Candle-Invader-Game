@@ -191,3 +191,8 @@ class GhostSwarmGroup(sprite.Group):
         self._check_even_ghost_row_edges() 
         self._check_odd_ghost_row_edges() 
 
+    def remove_shot_ghosts(self, fireball_group):
+        """Removes any ghosts that have been shot by player fireballs"""
+        sprite.groupcollide(fireball_group, self, True, True)
+
+
