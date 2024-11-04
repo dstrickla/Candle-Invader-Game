@@ -54,6 +54,11 @@ class Ghost(Enemy):
             self.is_moving_left = False 
             self.is_moving_right = True
 
+    def drop_down(self):
+        """Drops the ghost down according to the settings drop speed"""
+        self.y += self.settings.swarm_vertical_drop_speed 
+        self.rect.y = self.y 
+
     def _update_horizontal_position_even_row(self):
         """Updates the horizontal position of ghosts in an even row"""
         if self.is_moving_right: 
@@ -102,8 +107,8 @@ class GhostSwarmGroup(sprite.Group):
         self.swarm_vertical_margin = self.settings.swarm_vertical_margin
         self.available_horizontal_space = self._get_available_horizontal_space()
         self.available_vertical_space = self._get_available_vertical_space()  
-        self.ghosts_per_row = self._get_ghosts_per_row()
-        self.rows_of_ghosts = self._get_rows_of_ghosts()
+        self.number_of_ghost_rows = self._get_number_of_ghost_columns()
+        self.number_of_ghost_columns = self._get_number_of_ghost_rows()
         self._create_flying_swarm()
 
     def _get_available_horizontal_space(self):
@@ -114,12 +119,12 @@ class GhostSwarmGroup(sprite.Group):
         """Returns the height of the vertical space in which ghosts may fit"""
         return (self.settings.screen_height //2) - self.settings.player_height
     
-    def _get_ghosts_per_row(self): 
+    def _get_number_of_ghost_columns(self): 
         """Returns how many ghosts can fit in a row"""
         spacing = self.settings.ghost_width + self.swarm_horizontal_margin
         return self.available_horizontal_space // (spacing)
     
-    def _get_rows_of_ghosts(self):
+    def _get_number_of_ghost_rows(self):
         """Returns how many rows of ghosts can fit on the screen"""
         return self.available_vertical_space // self.settings.ghost_height 
     
@@ -150,11 +155,16 @@ class GhostSwarmGroup(sprite.Group):
         
     def _create_flying_swarm(self): 
         """Generates and add the swarm of ghosts at the top of the screen """
-        for row_num in range(self.rows_of_ghosts):
-            for col_num in range(self.ghosts_per_row): 
+        for row_num in range(self.number_of_ghost_columns):
+            for col_num in range(self.number_of_ghost_rows): 
                 self._create_and_add_ghost(row_num, col_num)
 
-    def _change_ghost_list_direction(self, ghosts):
+    def _drop_swarm(self):
+        """Drops the swarm down according to the game settings speed"""
+        for ghost in self.sprites(): 
+            ghost.drop_down() 
+
+    def _change_ghost_row_direction(self, ghosts):
         """Changes the directions of all ghosts in the list"""
         for ghost in ghosts: 
             ghost.switch_moving_direction()
@@ -164,7 +174,7 @@ class GhostSwarmGroup(sprite.Group):
         ghosts = [ghost for ghost in self.sprites() if ghost.row_num % 2 == 0]
         for ghost in ghosts: 
             if ghost.check_edge():
-                self._change_ghost_list_direction(ghosts)
+                self._change_ghost_row_direction(ghosts)
                 break
 
     def _check_odd_ghost_row_edges(self):
@@ -172,7 +182,8 @@ class GhostSwarmGroup(sprite.Group):
         ghosts = [ghost for ghost in self.sprites() if ghost.row_num % 2 != 0]
         for ghost in ghosts: 
             if ghost.check_edge():
-                self._change_ghost_list_direction(ghosts)
+                self._change_ghost_row_direction(ghosts)
+                self._drop_swarm()
                 break
 
     def check_swarm_direction_change(self):
