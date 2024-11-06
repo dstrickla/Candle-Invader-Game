@@ -16,6 +16,7 @@ class CandleInvader:
         pygame.display.set_caption("Candle Invader")
 
         self.settings = Settings()
+        self.mouse = pygame.mouse 
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((
             self.settings.screen_width, self.settings.screen_height))
@@ -29,21 +30,12 @@ class CandleInvader:
 
     def _check_keydown_events(self, event):
         """Checks and handles pygame.KEYDOWN game events"""
-        if event.key == pygame.K_w:
-            self.player.set_look_direction_up()
-        elif event.key == pygame.K_a:
+        if event.key == pygame.K_a:
             self.player.is_moving_left = True 
-            self.player.set_look_direction_left()
-        elif event.key == pygame.K_s: 
-            self.player.set_look_direction_down()
         elif event.key == pygame.K_d:
             self.player.is_moving_right = True 
-            self.player.set_look_direction_right()
         elif event.key == pygame.K_SPACE:
             self.player.is_jumping = True
-            self.player.set_look_direction_up()
-        elif event.key == pygame.K_LSHIFT:
-            self.player.shoot_fireball()
     
     def _check_keyup_events(self, event):
         """Checks and handles pygame.KEYUP game events"""
@@ -52,6 +44,11 @@ class CandleInvader:
         elif event.key == pygame.K_a:
             self.player.is_moving_left = False
 
+    def _check_mouse_events(self, event):
+        """Checks and handles pygame mouse related events"""
+        if event.button == 1: 
+            self.player.shoot_fireball()
+
     def _check_events(self):
         """Checks and responds to any new game events"""
         for event in pygame.event.get():
@@ -59,6 +56,8 @@ class CandleInvader:
                 self._check_keydown_events(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_events(event)
+            elif event.type == pygame.constants.MOUSEBUTTONDOWN: 
+                self._check_mouse_events(event) 
             elif event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()

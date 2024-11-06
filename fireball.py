@@ -1,52 +1,53 @@
 from pygame import sprite 
 from pygame import image 
 from settings import Direction
+from math import atan2 
+from math import cos 
+from math import sin 
 
 class Fireball(sprite.Sprite):
     """Class representing player fireball attack"""
 
-    def __init__(self, game, player):
+    def __init__(self, game):
         sprite.Sprite.__init__(self) 
         # Game Attributes
         self.game = game
         self.screen = game.screen 
         self.screen_rect = game.screen.get_rect()
         self.settings = game.settings  
-
-        # Fireball direction attribute
-        self.shot_direction = player.look_direction
+        self.mouse_position = game.mouse.get_pos() 
 
         # Fireball image and rect attributes
         self.image = image.load(self.settings.fireball_path)
         self.rect = self.image.get_rect() 
-        self._set_rect_start() 
+        self.starting_position = game.player.rect.midtop 
+        self.rect.midtop = self.starting_position
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-    def _set_rect_start(self):
-        """Sets start position based on direction fired in"""
-        match(self.shot_direction):
-            case Direction.LEFT.value: 
-                 self.rect.midleft = self.game.player.rect.midleft
-            case Direction.RIGHT.value: 
-                self.rect.midright = self.game.player.rect.midright 
-            case Direction.UP.value: 
-                self.rect.midtop = self.game.player.rect.midtop 
-            case Direction.DOWN.value: 
-                self.rect.midbottom = self.game.player.rect.midbottom
+        # Get fireball path angle and speed 
+        self.angle = self._get_fireball_angle()
+        self.speed_x = self._get_x_speed()
+        self.speed_y = self._get_y_speed() 
+
+    def _get_fireball_angle(self): 
+        """Returns the arc tangent angle of rise and run"""
+        x1, y1 = self.starting_position 
+        x2, y2 = self.mouse_position 
+        return atan2((y2-y1), (x2-x1))
+
+    def _get_x_speed(self):
+        """Returns the cosine of slope angle"""
+        return self.settings.fireball_speed * cos(self.angle) 
+    
+    def _get_y_speed(self):
+        """Returns the sine of slope angle"""
+        return self.settings.fireball_speed * sin(self.angle)
 
     def update(self):
         """Updates the fireball's position on the screen"""
-        match(self.shot_direction):
-            case Direction.LEFT.value: 
-                self.x -= self.settings.fireball_speed 
-            case Direction.RIGHT.value: 
-                self.x += self.settings.fireball_speed 
-            case Direction.UP.value: 
-                self.y -= self.settings.fireball_speed 
-            case Direction.DOWN.value: 
-                self.y += self.settings.fireball_speed 
-
+        self.x += self.speed_x 
+        self.y += self.speed_y
         self.rect.x = self.x 
         self.rect.y = self.y  
 

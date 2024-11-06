@@ -29,9 +29,6 @@ class Player:
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
-        # Player looking direction attributes
-        self.look_direction = Direction.LEFT.value
-
         # Player Fireball Group 
         self.fireball_group = FireballGroup(game)
 
@@ -44,26 +41,10 @@ class Player:
             self.jump_count = 12
             self.is_jumping = False
 
-    def shoot_fireball(self):
+    def shoot_fireball(self,):
         """Adds a new fireball to the players group"""
-        new_fireball = Fireball(self.game, self)
+        new_fireball = Fireball(self.game)
         self.fireball_group.add(new_fireball)
-
-    def set_look_direction_up(self):
-        """Sets player look direction upwards"""
-        self.look_direction = Direction.UP.value 
-
-    def set_look_direction_right(self):
-        """Sets player look direction to the right"""
-        self.look_direction = Direction.RIGHT.value 
-
-    def set_look_direction_down(self): 
-        """Sets player look direction downwards"""
-        self.look_direction = Direction.DOWN.value
-
-    def set_look_direction_left(self):
-        """Sets player look direction left"""
-        self.look_direction = Direction.LEFT.value
 
     def update(self):
         """Updates the player's rect position on game screen"""
