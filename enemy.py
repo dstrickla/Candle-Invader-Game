@@ -13,7 +13,7 @@ class Enemy(sprite.Sprite):
         self.ghost = _ghost 
         self.is_moving_right = False  
         self.is_moving_left = False 
-        self.image = image.load(self._get_enemy_img_path())
+        self.image = self._get_enemy_img() 
         self.rect = self.image.get_rect() 
         self.rect.x = self.rect.width // 2 # Start at top left of screen 
         self.rect.y = self.rect.height // 4 
@@ -21,12 +21,12 @@ class Enemy(sprite.Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)        
 
-    def _get_enemy_img_path(self):
+    def _get_enemy_img(self):
         """Returns the correct img path for enemy type selected"""
         if self.ghost: 
-            return self.settings.GHOST_IMG_PATH 
+            return self.settings.GHOST_IMG
         else: #self.walker
-            return self.settings.WALKER_IMG_PATH
+            return self.settings.WALKER_IMG
 
 class Ghost(Enemy):
     """Class representing a flying Enemy"""

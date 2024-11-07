@@ -14,7 +14,8 @@ class CandleInvader:
         """Game Constructor"""
         pygame.init()
         pygame.display.set_caption("Candle Invader")
-aa
+
+        self.settings = Settings() 
         self.mouse = pygame.mouse 
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((

@@ -18,7 +18,7 @@ class Fireball(sprite.Sprite):
         self.mouse_position = game.mouse.get_pos() 
 
         # Fireball image and rect attributes
-        self.image = image.load(self.settings.FIREBALL_IMG_PATH)
+        self.image = self.settings.FIREBALL_IMG 
         self.rect = self.image.get_rect() 
         self.starting_position = game.player.rect.midtop 
         self.rect.midtop = self.starting_position
