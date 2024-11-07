@@ -15,17 +15,17 @@ class Player:
         self.settings = game.settings
 
         # Player image and rect attributes
-        self.image = image.load(game.settings.player_img_path)
+        self.image = image.load(game.settings.PLAYER_IMG_PATH)
         self.rect = self.image.get_rect()
-        self.rect.center = (self.settings.player_x_start,
-                            self.settings.player_y_start)
+        self.rect.center = (self.settings.PLAYER_X_START,
+                            self.settings.PLAYER_Y_START)
 
         # Player Motion attributes
         self.is_moving_right = False 
         self.is_moving_left = False 
         self.is_jumping = False 
-        self.jump_count = self.settings.player_jump_count
-        self.jump_modifier = self.settings.player_jump_modifier
+        self.jump_count = self.settings.PLAYER_JUMP_COUNT
+        self.jump_modifier = self.settings.PLAYER_JUMP_MODIFIER
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
 
@@ -48,12 +48,12 @@ class Player:
 
     def update(self):
         """Updates the player's rect position on game screen"""
-        right_bound = self.settings.screen_width 
-        left_bound = self.settings.screen_origin
+        right_bound = self.settings.SCREEN_WIDTH 
+        left_bound = self.settings.SCREEN_ORIGIN
         if self.is_moving_right and self.rect.right < right_bound:
-            self.x += self.settings.player_horizontal_speed
+            self.x += self.settings.PLAYER_HORIZONTAL_SPEED
         if self.is_moving_left and self.rect.left > left_bound:
-            self.x -= self.settings.player_horizontal_speed
+            self.x -= self.settings.PLAYER_HORIZONTAL_SPEED
         if self.is_jumping: 
             self.jump()
 

@@ -24,16 +24,16 @@ class Enemy(sprite.Sprite):
     def _get_enemy_img_path(self):
         """Returns the correct img path for enemy type selected"""
         if self.ghost: 
-            return self.settings.ghost_img_path 
+            return self.settings.GHOST_IMG_PATH 
         else: #self.walker
-            return self.settings.walker_img_path
+            return self.settings.WALKER_IMG_PATH
 
 class Ghost(Enemy):
     """Class representing a flying Enemy"""
     def __init__(self, game, row_num, col_num):
         """Flying Enemy Constructor"""
         super().__init__(game, _ghost=True)
-        self.horizontal_speed = self.settings.ghost_horizontal_speed
+        self.horizontal_speed = self.settings.GHOST_HORIZONTAL_SPEED
         self.is_moving_right = True  
         self.is_moving_left = False  
         self.row_num = row_num  
@@ -56,23 +56,23 @@ class Ghost(Enemy):
 
     def drop_down(self):
         """Drops the ghost down according to the settings drop speed"""
-        self.y += self.settings.swarm_vertical_drop_speed 
+        self.y += self.settings.SWARM_VERTICAL_DROP_SPEED 
         self.rect.y = self.y 
 
     def _update_horizontal_position_even_row(self):
         """Updates the horizontal position of ghosts in an even row"""
         if self.is_moving_right: 
-            self.x += self.settings.ghost_horizontal_speed 
+            self.x += self.settings.GHOST_HORIZONTAL_SPEED 
         elif self.is_moving_left:
-            self.x -= self.settings.ghost_horizontal_speed 
+            self.x -= self.settings.GHOST_HORIZONTAL_SPEED 
         self.rect.x = self.x 
 
     def _update_horizontal_position_odd_row(self):
         """Updates the horizontal position of ghosts in an odd row"""
         if self.is_moving_right: 
-            self.x += self.settings.ghost_horizontal_speed 
+            self.x += self.settings.GHOST_HORIZONTAL_SPEED 
         elif self.is_moving_left:
-            self.x -= self.settings.ghost_horizontal_speed 
+            self.x -= self.settings.GHOST_HORIZONTAL_SPEED 
         self.rect.x = self.x 
 
     def _update_horizontal_position(self):
@@ -92,7 +92,7 @@ class Walker(Enemy):
     def __init__(self, game):
         """Walking Enemy Constructor"""
         super().__init__(game, _walker=True)
-        self.horizontal_speed = self.settings.walker_horizontal_speed 
+        self.horizontal_speed = self.settings.WALKER_HORIZONTAL_SPEED 
 
 
 class GhostSwarmGroup(sprite.Group):
@@ -103,8 +103,8 @@ class GhostSwarmGroup(sprite.Group):
         self.game = game 
         self.screen = game.screen 
         self.settings = game.settings 
-        self.swarm_horizontal_margin = self.settings.swarm_horizontal_margin
-        self.swarm_vertical_margin = self.settings.swarm_vertical_margin
+        self.SWARM_HORIZONTAL_MARGIN = self.settings.SWARM_HORIZONTAL_MARGIN
+        self.SWARM_VERTICAL_MARGIN = self.settings.SWARM_VERTICAL_MARGIN
         self.available_horizontal_space = self._get_available_horizontal_space()
         self.available_vertical_space = self._get_available_vertical_space()  
         self.number_of_ghost_rows = self._get_number_of_ghost_columns()
@@ -113,36 +113,36 @@ class GhostSwarmGroup(sprite.Group):
 
     def _get_available_horizontal_space(self):
         """Returns the length of the row in which ghosts may be fit"""
-        return self.settings.screen_width - self.swarm_horizontal_margin
+        return self.settings.SCREEN_WIDTH - self.SWARM_HORIZONTAL_MARGIN
     
     def _get_available_vertical_space(self):
         """Returns the height of the vertical space in which ghosts may fit"""
-        return (self.settings.screen_height //2) - self.settings.player_height
+        return (self.settings.SCREEN_HEIGHT //2) - self.settings.PLAYER_HEIGHT
     
     def _get_number_of_ghost_columns(self): 
         """Returns how many ghosts can fit in a row"""
-        spacing = self.settings.ghost_width + self.swarm_horizontal_margin
+        spacing = self.settings.GHOST_WIDTH + self.SWARM_HORIZONTAL_MARGIN
         return self.available_horizontal_space // (spacing)
     
     def _get_number_of_ghost_rows(self):
         """Returns how many rows of ghosts can fit on the screen"""
-        return self.available_vertical_space // self.settings.ghost_height 
+        return self.available_vertical_space // self.settings.GHOST_HEIGHT 
     
     def _get_ghost_y_start(self, new_ghost): 
         """Returns the new y cord for a ghost based upon row placement"""
-        ghost_height = self.settings.ghost_height  
-        offset = (self.swarm_vertical_margin + ghost_height) * new_ghost.row_num 
-        return self.swarm_vertical_margin + offset 
+        GHOST_HEIGHT = self.settings.GHOST_HEIGHT  
+        offset = (self.SWARM_VERTICAL_MARGIN + GHOST_HEIGHT) * new_ghost.row_num 
+        return self.SWARM_VERTICAL_MARGIN + offset 
 
     def _get_ghost_x_start(self, new_ghost):
         """Returns the x cord for a ghost based on col_num and row_num"""
-        ghost_width = self.settings.ghost_width 
-        offset = (self.swarm_horizontal_margin + ghost_width) * new_ghost.col_num 
+        GHOST_WIDTH = self.settings.GHOST_WIDTH 
+        offset = (self.SWARM_HORIZONTAL_MARGIN + GHOST_WIDTH) * new_ghost.col_num 
         if new_ghost.row_num % 2 == 0: 
-            return self.swarm_horizontal_margin + offset 
+            return self.SWARM_HORIZONTAL_MARGIN + offset 
         else: 
-            offset += ghost_width + self.settings.swarm_horizontal_margin
-            return self.settings.screen_width - offset 
+            offset += GHOST_WIDTH + self.settings.SWARM_HORIZONTAL_MARGIN
+            return self.settings.SCREEN_WIDTH - offset 
 
     def _create_and_add_ghost(self, row_num, col_num): 
         """Creates a ghost with position in row according to col_num"""

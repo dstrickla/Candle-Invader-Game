@@ -14,19 +14,18 @@ class CandleInvader:
         """Game Constructor"""
         pygame.init()
         pygame.display.set_caption("Candle Invader")
-
-        self.settings = Settings()
+aa
         self.mouse = pygame.mouse 
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((
-            self.settings.screen_width, self.settings.screen_height))
+            self.settings.SCREEN_WIDTH, self.settings.SCREEN_HEIGHT))
         
         self.background = Background(self)
         self.player = Player(self)
         self.enemy_group = GhostSwarmGroup(self)
-        self.floor_group = Floor(self, self.settings.floor_x_start, 
-                                 self.settings.floor_x_finish, 
-                                 self.settings.floor_y_height)
+        self.floor_group = Floor(self, self.settings.FLOOR_X_START, 
+                                 self.settings.FLOOR_X_FINISH, 
+                                 self.settings.FLOOR_Y_HEIGHT)
 
     def _check_keydown_events(self, event):
         """Checks and handles pygame.KEYDOWN game events"""

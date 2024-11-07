@@ -10,7 +10,7 @@ class Block(sprite.Sprite):
         self.screen = game.screen 
         self.screen_rect = game.screen.get_rect() 
         self.settings = game.settings 
-        self.image = image.load(self.settings.block_path)
+        self.image = image.load(self.settings.BLOCK_PATH)
         self.rect = self.image.get_rect() 
         self.rect.center = location 
 
@@ -30,7 +30,7 @@ class Floor(sprite.Group):
         self.x_start = x_start 
         self.x_finish = x_finish
         self.y_height = y_height  
-        self.block_spacing = self.settings.block_dim
+        self.block_spacing = self.settings.BLOCK_DIM
         self.block_locations = self._get_block_locations()
         self._create_floor_group()
 

@@ -18,7 +18,7 @@ class Fireball(sprite.Sprite):
         self.mouse_position = game.mouse.get_pos() 
 
         # Fireball image and rect attributes
-        self.image = image.load(self.settings.fireball_path)
+        self.image = image.load(self.settings.FIREBALL_IMG_PATH)
         self.rect = self.image.get_rect() 
         self.starting_position = game.player.rect.midtop 
         self.rect.midtop = self.starting_position
@@ -38,11 +38,11 @@ class Fireball(sprite.Sprite):
 
     def _get_x_speed(self):
         """Returns the cosine of slope angle"""
-        return self.settings.fireball_speed * cos(self.angle) 
+        return self.settings.FIREBALL_SPEED * cos(self.angle) 
     
     def _get_y_speed(self):
         """Returns the sine of slope angle"""
-        return self.settings.fireball_speed * sin(self.angle)
+        return self.settings.FIREBALL_SPEED * sin(self.angle)
 
     def update(self):
         """Updates the fireball's position on the screen"""
@@ -65,10 +65,10 @@ class FireballGroup(sprite.Group):
         self.game = game 
         self.screen = game.screen 
         self.settings = game.settings 
-        self.left_screen_bound = self.settings.screen_origin  
-        self.right_screen_bound = self.settings.screen_width 
-        self.upper_screen_bound = self.settings.screen_origin
-        self.lower_screen_bound = self.settings.screen_height 
+        self.left_screen_bound = self.settings.SCREEN_ORIGIN  
+        self.right_screen_bound = self.settings.SCREEN_WIDTH 
+        self.upper_screen_bound = self.settings.SCREEN_ORIGIN
+        self.lower_screen_bound = self.settings.SCREEN_HEIGHT 
 
 
     def clear_offscreen_fireballs(self):
