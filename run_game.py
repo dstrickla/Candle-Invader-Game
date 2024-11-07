@@ -27,6 +27,14 @@ class CandleInvader:
         self.floor_group = Floor(self, self.settings.FLOOR_X_START, 
                                  self.settings.FLOOR_X_FINISH, 
                                  self.settings.FLOOR_Y_HEIGHT)
+        
+        self._schedule_game_events() 
+
+    def _schedule_game_events(self):
+        """Schedules game events that occur in the game"""        
+        self.ghost_drop_event = pygame.USEREVENT + 1 
+        pygame.time.set_timer(self.ghost_drop_event, 
+                              self.settings.SWARM_VERTICAL_MS_DROP_TIME)
 
     def _check_keydown_events(self, event):
         """Checks and handles pygame.KEYDOWN game events"""
@@ -58,6 +66,8 @@ class CandleInvader:
                 self._check_keyup_events(event)
             elif event.type == pygame.constants.MOUSEBUTTONDOWN: 
                 self._check_mouse_events(event) 
+            elif event.type == self.ghost_drop_event: 
+                self.enemy_group._drop_swarm() 
             elif event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()

@@ -183,7 +183,7 @@ class GhostSwarmGroup(sprite.Group):
         for ghost in ghosts: 
             if ghost.check_edge():
                 self._change_ghost_row_direction(ghosts)
-                self._drop_swarm()
+                #self._drop_swarm()
                 break
 
     def check_swarm_direction_change(self):

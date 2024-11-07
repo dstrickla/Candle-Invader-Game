@@ -47,7 +47,8 @@ class Settings:
         # Ghost Swarm Settings
         self.SWARM_HORIZONTAL_MARGIN = self.GHOST_WIDTH // 4 
         self.SWARM_VERTICAL_MARGIN = self.GHOST_HEIGHT // 8
-        self.SWARM_VERTICAL_DROP_SPEED = 5
+        self.SWARM_VERTICAL_DROP_SPEED = 10
+        self.SWARM_VERTICAL_MS_DROP_TIME = 1500
 
         # Walking Enemy Settings (Walker)
         self.WALKER_IMG_PATH = r'assets\walker_placeholder.bmp'
