@@ -1,5 +1,6 @@
 import sys
 import pygame
+import time
 
 from settings import Settings
 from background import Background
@@ -28,7 +29,8 @@ class CandleInvader:
                                  self.settings.FLOOR_X_FINISH, 
                                  self.settings.FLOOR_Y_HEIGHT)
         
-        self._schedule_game_events() 
+        self._schedule_game_events()
+        self.active = True 
 
     def _schedule_game_events(self):
         """Schedules game events that occur in the game"""        
@@ -44,6 +46,12 @@ class CandleInvader:
             self.player.is_moving_right = True 
         elif event.key == pygame.K_SPACE:
             self.player.is_jumping = True
+        elif event.key == pygame.K_r: 
+            game = CandleInvader()
+            game.run_game() 
+        elif event.key == pygame.K_q: 
+            pygame.quit() 
+            sys.exit() 
     
     def _check_keyup_events(self, event):
         """Checks and handles pygame.KEYUP game events"""
@@ -82,17 +90,46 @@ class CandleInvader:
 
         pygame.display.update()
 
+    def _handle_lost_player_life(self): 
+        """Resets the game after player loses life"""
+        self.player.decrement_player_lives() 
+        if self.player.player_lives <= 0: 
+            self.active = False 
+        else: 
+            self.player.initialize_starting_position()
+            self.player.fireball_group.empty() 
+            self.enemy_group.empty() 
+            self.enemy_group.create_flying_swarm()  
+            time.sleep(0.5)
+
+    def _check_handle_player_ghost_collision(self): 
+        """Checks and handles player-ghost collision"""
+        if pygame.sprite.spritecollideany(self.player, self.enemy_group): 
+            self._handle_lost_player_life() 
+
+    def _check_handle_ghost_floor_collision(self): 
+        """Checks and handles a ghost-floor collision""" 
+        if pygame.sprite.groupcollide(self.enemy_group, self.floor_group, False, False):
+            self._handle_lost_player_life()
+
     def run_game(self):
         """Main Loop Game Logic"""
         while True: 
             self.clock.tick(60)
             self._check_events()
-            self.player.update()
-            self.player.fireball_group.update()
-            self.player.fireball_group.clear_offscreen_fireballs()
-            self.enemy_group.remove_shot_ghosts(self.player.fireball_group)
-            self.enemy_group.update()
-            self.enemy_group.check_swarm_direction_change()
+
+            if self.active: 
+                self.player.update()
+                self.player.fireball_group.update()
+                self.player.fireball_group.clear_offscreen_fireballs()
+                self.enemy_group.remove_shot_ghosts(self.player.fireball_group)
+                self.enemy_group.update()
+                self.enemy_group.check_swarm_direction_change()
+                self._check_handle_player_ghost_collision() 
+                self._check_handle_ghost_floor_collision()
+            else: 
+                pygame.time.set_timer(self.ghost_drop_event, 0)
+
             self._update_screen()
 
 if __name__ == '__main__':

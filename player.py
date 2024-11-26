@@ -17,8 +17,7 @@ class Player:
         # Player image and rect attributes
         self.image = image.load(game.settings.PLAYER_IMG_PATH)
         self.rect = self.image.get_rect()
-        self.rect.center = (self.settings.PLAYER_X_START,
-                            self.settings.PLAYER_Y_START)
+        self.initialize_starting_position()
 
         # Player Motion attributes
         self.is_moving_right = False 
@@ -31,6 +30,14 @@ class Player:
 
         # Player Fireball Group 
         self.fireball_group = FireballGroup(game)
+
+        # Player lives 
+        self.player_lives = self.settings.PLAYER_INITIAL_LIVES
+
+    def initialize_starting_position(self):
+        """Positions the player at the starting position for the game"""
+        self.rect.center = (self.settings.PLAYER_X_START, 
+                            self.settings.PLAYER_Y_START)
 
     def jump(self):
         """Handles the logic of a player jump event"""
@@ -45,6 +52,10 @@ class Player:
         """Adds a new fireball to the players group"""
         new_fireball = Fireball(self.game)
         self.fireball_group.add(new_fireball)
+
+    def decrement_player_lives(self): 
+        """Decrements the player lives by one"""
+        self.player_lives -= 1
 
     def update(self):
         """Updates the player's rect position on game screen"""

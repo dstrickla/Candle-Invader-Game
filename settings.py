@@ -19,6 +19,7 @@ class Settings:
         # Player Settings
         self.PLAYER_IMG_PATH = r'assets\player_placeholder.bmp'
         self.PLAYER_IMG = image.load(self.PLAYER_IMG_PATH)
+        self.PLAYER_INITIAL_LIVES = 1
         self.PLAYER_WIDTH = self.PLAYER_IMG.get_width()  
         self.PLAYER_HEIGHT = self.PLAYER_IMG.get_height() 
         self.PLAYER_X_START = self.SCREEN_WIDTH / 2
@@ -48,7 +49,7 @@ class Settings:
         self.SWARM_HORIZONTAL_MARGIN = self.GHOST_WIDTH // 4 
         self.SWARM_VERTICAL_MARGIN = self.GHOST_HEIGHT // 8
         self.SWARM_VERTICAL_DROP_SPEED = 10
-        self.SWARM_VERTICAL_MS_DROP_TIME = 1500
+        self.SWARM_VERTICAL_MS_DROP_TIME = 500
 
         # Walking Enemy Settings (Walker)
         self.WALKER_IMG_PATH = r'assets\walker_placeholder.bmp'

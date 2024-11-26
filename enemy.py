@@ -109,7 +109,7 @@ class GhostSwarmGroup(sprite.Group):
         self.available_vertical_space = self._get_available_vertical_space()  
         self.number_of_ghost_rows = self._get_number_of_ghost_columns()
         self.number_of_ghost_columns = self._get_number_of_ghost_rows()
-        self._create_flying_swarm()
+        self.create_flying_swarm()
 
     def _get_available_horizontal_space(self):
         """Returns the length of the row in which ghosts may be fit"""
@@ -153,7 +153,7 @@ class GhostSwarmGroup(sprite.Group):
         new_ghost.rect.y = new_ghost.y
         self.add(new_ghost)
         
-    def _create_flying_swarm(self): 
+    def create_flying_swarm(self): 
         """Generates and add the swarm of ghosts at the top of the screen """
         for row_num in range(self.number_of_ghost_columns):
             for col_num in range(self.number_of_ghost_rows): 
